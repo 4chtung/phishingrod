@@ -39,3 +39,17 @@ echo
 
 
 fancyintro
+
+
+## INSTALL APACHE2
+sudo apt-get install apache2 -y
+
+## INSTALL PHP
+sudo apt-get install php5 libapache2-mod-php5 -y
+
+## INSTALL SET
+git clone https://github.com/trustedsec/social-engineer-toolkit/ set/
+cd set
+python setup.py install
+
+
