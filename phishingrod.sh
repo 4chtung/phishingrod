@@ -57,12 +57,7 @@ apt-get update
 apt-get install apache2 -y
 
 ## INSTALL PHP
-apt-get install php5 libapache2-mod-php5 -y
-
-## INSTALL SET - THIS ISN'T NEEDED ANYMORE
-## git clone https://github.com/trustedsec/social-engineer-toolkit/ set/
-## cd set
-## python setup.py install
+apt-get install php libapache2-mod-php -y
 
 ## Install Site Template to Apache Folder
-cp /site/ /var/www/html/
+cp site/* /var/www/html/
