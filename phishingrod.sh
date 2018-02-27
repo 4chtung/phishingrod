@@ -40,16 +40,29 @@ echo
 
 fancyintro
 
+## CHECK FOR ROOT ACCESS
+
+if (( $EUID != 0 )); then
+    echo -e "${RED}ERROR!!! -- YOU ARE NOT ROOT! -- ERROR!!!${RESET}"
+    echo -e "${RED}  PLEASE RUN AS ROOT!${RESET}"
+    echo
+    exit
+fi
+
+## UPDATE APT FILES
+
+apt-get update
 
 ## INSTALL APACHE2
-sudo apt-get install apache2 -y
+apt-get install apache2 -y
 
 ## INSTALL PHP
-sudo apt-get install php5 libapache2-mod-php5 -y
+apt-get install php5 libapache2-mod-php5 -y
 
-## INSTALL SET
-git clone https://github.com/trustedsec/social-engineer-toolkit/ set/
-cd set
-python setup.py install
+## INSTALL SET - THIS ISN'T NEEDED ANYMORE
+## git clone https://github.com/trustedsec/social-engineer-toolkit/ set/
+## cd set
+## python setup.py install
 
-
+## Install Site Template to Apache Folder
+cp /site/ /var/www/html/
